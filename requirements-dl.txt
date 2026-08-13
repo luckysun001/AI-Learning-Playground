@@ -1,0 +1,9 @@
+# 深度学习依赖
+# 安装：pip install -r requirements-dl.txt
+# 注意：torch 体积较大，建议先装 CPU 版：
+#   pip install torch --index-url https://download.pytorch.org/whl/cpu
+torch>=2.1
+torchvision>=0.16
+pytorch-lightning>=2.0
+tensorboard>=2.13
+tqdm>=4.65

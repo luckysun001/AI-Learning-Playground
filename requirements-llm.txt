@@ -1,0 +1,13 @@
+# 大模型 / RAG / Agent 依赖
+# 安装：pip install -r requirements-llm.txt
+transformers>=4.40
+datasets>=2.18
+peft>=0.10
+accelerate>=0.29
+langchain>=0.2
+langchain-community>=0.2
+langgraph>=0.1
+chromadb>=0.5
+faiss-cpu>=1.8
+openai>=1.30
+sentence-transformers>=2.7

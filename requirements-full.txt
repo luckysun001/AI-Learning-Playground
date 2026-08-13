@@ -1,0 +1,4 @@
+# 完整依赖（base + dl + llm）
+-r requirements-base.txt
+-r requirements-dl.txt
+-r requirements-llm.txt
