@@ -21,7 +21,7 @@
 | 预训练与微调 | `docs/pretrain-finetune/` | 📅 规划中 |
 | 迁移学习 | `docs/transfer-learning/` | 📅 规划中 |
 | RAG 检索增强生成 | `docs/rag/` | 📅 规划中 |
-| Agent 智能体 | `docs/agent/` | 📅 规划中 |
+| Agent 智能体 | `docs/agent/` · `code/07-agent/` | 🚧 进行中 |
 | 多智能体系统 | `docs/multi-agent/` | 📅 规划中 |
 
 图例：✅ 已完成 · 🚧 进行中 · 📅 规划中
