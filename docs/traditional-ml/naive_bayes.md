@@ -38,7 +38,7 @@ $$P(y|x_1,\dots,x_n) = \frac{P(y)\prod_{i=1}^{n}P(x_i|y)}{P(x)}$$
 
 ## 5. 实战案例
 
-- 文本分类常作为基线；本项目传统 ML 模块未单独列脚本，可与 [`case2_churn_prediction.py`](case2_churn_prediction.py) 的类别型特征结合尝试。
+- 文本分类常作为基线；本项目传统 ML 模块未单独列脚本，可与 [`case2_churn_prediction.py`](../../code/01-traditional-ml/case2_churn_prediction.py) 的类别型特征结合尝试。
 
 ## 6. 扩展阅读
 
