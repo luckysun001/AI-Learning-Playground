@@ -7,6 +7,7 @@
 依赖：numpy, scikit-learn
 说明：为演示清晰，训练集规模刻意取小；大数据请用 sklearn 的 DecisionTreeClassifier。
 """
+
 import numpy as np
 from sklearn.datasets import make_classification
 from sklearn.metrics import accuracy_score
@@ -14,19 +15,18 @@ from sklearn.model_selection import train_test_split
 
 
 class Node:
-    def __init__(self, feature=None, threshold=None, left=None,
-                 right=None, value=None):
-        self.feature = feature        # 内部节点：切分特征索引
-        self.threshold = threshold    # 内部节点：切分阈值
+    def __init__(self, feature=None, threshold=None, left=None, right=None, value=None):
+        self.feature = feature  # 内部节点：切分特征索引
+        self.threshold = threshold  # 内部节点：切分阈值
         self.left = left
         self.right = right
-        self.value = value            # 叶节点：类别
+        self.value = value  # 叶节点：类别
 
 
 def gini(y):
     classes, counts = np.unique(y, return_counts=True)
     p = counts / counts.sum()
-    return 1.0 - np.sum(p ** 2)
+    return 1.0 - np.sum(p**2)
 
 
 def best_split(X, y):
@@ -51,7 +51,7 @@ def best_split(X, y):
 
 
 def build_tree(X, y, depth=0, max_depth=6, min_samples_split=2):
-    if (len(y) < min_samples_split or depth >= max_depth or gini(y) == 0):
+    if len(y) < min_samples_split or depth >= max_depth or gini(y) == 0:
         classes, counts = np.unique(y, return_counts=True)
         return Node(value=classes[np.argmax(counts)])
     split = best_split(X, y)
@@ -61,8 +61,12 @@ def build_tree(X, y, depth=0, max_depth=6, min_samples_split=2):
     f, t = split
     left_mask = X[:, f] <= t
     right_mask = ~left_mask
-    left = build_tree(X[left_mask], y[left_mask], depth + 1, max_depth, min_samples_split)
-    right = build_tree(X[right_mask], y[right_mask], depth + 1, max_depth, min_samples_split)
+    left = build_tree(
+        X[left_mask], y[left_mask], depth + 1, max_depth, min_samples_split
+    )
+    right = build_tree(
+        X[right_mask], y[right_mask], depth + 1, max_depth, min_samples_split
+    )
     return Node(feature=f, threshold=t, left=left, right=right)
 
 
@@ -91,8 +95,7 @@ def print_tree(node, feature_names, depth=0):
 
 def main():
     X, y = make_classification(
-        n_samples=300, n_features=4, n_informative=3,
-        n_redundant=1, random_state=42
+        n_samples=300, n_features=4, n_informative=3, n_redundant=1, random_state=42
     )
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.3, random_state=42

@@ -9,6 +9,7 @@
 依赖：numpy, pandas, scikit-learn
 说明：本脚本用合成数据演示 WOE 计算与逻辑回归打分全流程。
 """
+
 import numpy as np
 import pandas as pd
 from sklearn.linear_model import LogisticRegression
@@ -56,8 +57,8 @@ def main():
         woe_maps[col] = woe_map
         ivs[col] = iv
         df[col + "_woe"] = df[col].apply(
-            lambda v: next((woe_maps[col][b] for b in woe_maps[col]
-                            if v in b), 0.0))
+            lambda v: next((woe_maps[col][b] for b in woe_maps[col] if v in b), 0.0)
+        )
 
     print("【案例4 · 信贷评分卡（WOE + 逻辑回归）】")
     for col in ["income", "debt"]:

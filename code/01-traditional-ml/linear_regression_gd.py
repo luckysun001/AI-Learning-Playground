@@ -9,6 +9,7 @@
 
 预期输出：两行指标接近，说明从零实现正确。
 """
+
 import numpy as np
 from sklearn.datasets import make_regression
 from sklearn.linear_model import LinearRegression
@@ -30,7 +31,7 @@ def linear_regression_gd(X, y, lr=0.01, epochs=1000, verbose=False):
     for epoch in range(epochs):
         y_pred = X @ theta
         error = y_pred - y
-        grad = (X.T @ error) / m          # 与文档伪代码一致
+        grad = (X.T @ error) / m  # 与文档伪代码一致
         theta = theta - lr * grad
         losses.append(mean_squared_error(y, y_pred))
         if verbose and epoch % 200 == 0:
@@ -40,9 +41,7 @@ def linear_regression_gd(X, y, lr=0.01, epochs=1000, verbose=False):
 
 def main():
     # 合成回归数据（无需外部下载）
-    X, y = make_regression(
-        n_samples=2000, n_features=5, noise=15.0, random_state=42
-    )
+    X, y = make_regression(n_samples=2000, n_features=5, noise=15.0, random_state=42)
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.2, random_state=42
     )
@@ -65,14 +64,18 @@ def main():
     y_pred_sk = lr.predict(X_test)
 
     print("【线性回归 · 梯度下降 vs sklearn 闭式解】")
-    print("  从零实现  MSE=%.4f  R²=%.4f" % (
-        mean_squared_error(y_test, y_pred_scratch),
-        r2_score(y_test, y_pred_scratch)))
-    print("  sklearn   MSE=%.4f  R²=%.4f" % (
-        mean_squared_error(y_test, y_pred_sk),
-        r2_score(y_test, y_pred_sk)))
-    print("  参数一致度（与 sklearn.coef_ 接近）:",
-          np.allclose(theta[1:], lr.coef_, atol=2.0))
+    print(
+        "  从零实现  MSE=%.4f  R²=%.4f"
+        % (mean_squared_error(y_test, y_pred_scratch), r2_score(y_test, y_pred_scratch))
+    )
+    print(
+        "  sklearn   MSE=%.4f  R²=%.4f"
+        % (mean_squared_error(y_test, y_pred_sk), r2_score(y_test, y_pred_sk))
+    )
+    print(
+        "  参数一致度（与 sklearn.coef_ 接近）:",
+        np.allclose(theta[1:], lr.coef_, atol=2.0),
+    )
 
 
 if __name__ == "__main__":

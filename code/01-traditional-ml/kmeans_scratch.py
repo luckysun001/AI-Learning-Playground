@@ -5,16 +5,25 @@ K-Means 聚类：从零实现（k-means++ 初始化）+ 与 sklearn 对比 + PCA
 
 运行：python kmeans_scratch.py
 依赖：numpy, scikit-learn, matplotlib
-说明：可视化图保存为 ../../assets/kmeans_pca.png（如无法显示则用 Agg 后端）
+说明：可视化图保存到仓库根目录的 assets/kmeans_pca.png
+      （输出路径按脚本所在位置计算，因此从任意目录运行都写到同一位置；
+       无界面环境会自动使用 Agg 后端）
 """
+
+from pathlib import Path
+
+# 输出目录 = 仓库根目录/assets，与运行脚本时的当前目录无关
+ASSETS_DIR = Path(__file__).resolve().parents[2] / "assets"
+ASSETS_DIR.mkdir(parents=True, exist_ok=True)
+
+# 无界面环境也能跑
+import matplotlib
 import numpy as np
 from sklearn.cluster import KMeans
 from sklearn.datasets import make_blobs
 from sklearn.decomposition import PCA
 from sklearn.metrics import silhouette_score
 
-# 无界面环境也能跑
-import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
@@ -23,9 +32,7 @@ def kmeans_plus_plus_init(X, k, rng):
     n = X.shape[0]
     centers = [X[rng.integers(n)]]
     for _ in range(1, k):
-        dist2 = np.min(
-            [np.sum((X - c) ** 2, axis=1) for c in centers], axis=0
-        )
+        dist2 = np.min([np.sum((X - c) ** 2, axis=1) for c in centers], axis=0)
         probs = dist2 / dist2.sum()
         idx = rng.choice(n, p=probs)
         centers.append(X[idx])
@@ -52,9 +59,7 @@ def kmeans_scratch(X, k, max_iter=100, seed=42):
 
 
 def main():
-    X, y_true = make_blobs(
-        n_samples=1000, n_features=8, centers=4, random_state=42
-    )
+    X, y_true = make_blobs(n_samples=1000, n_features=8, centers=4, random_state=42)
 
     # 从零实现
     centroids, labels = kmeans_scratch(X, k=4)
@@ -71,13 +76,21 @@ def main():
     X2 = PCA(n_components=2).fit_transform(X)
     plt.figure(figsize=(6, 5))
     plt.scatter(X2[:, 0], X2[:, 1], c=labels, cmap="viridis", s=12)
-    plt.scatter(centroids[:, 0], centroids[:, 1], c="red", marker="X",
-                s=200, edgecolors="k", label="centroids")
+    plt.scatter(
+        centroids[:, 0],
+        centroids[:, 1],
+        c="red",
+        marker="X",
+        s=200,
+        edgecolors="k",
+        label="centroids",
+    )
     plt.title("K-Means Clustering (PCA 2D projection)")
     plt.legend()
     plt.tight_layout()
-    plt.savefig("../../assets/kmeans_pca.png", dpi=120)
-    print("  可视化已保存: ../../assets/kmeans_pca.png")
+    out_path = ASSETS_DIR / "kmeans_pca.png"
+    plt.savefig(out_path, dpi=120)
+    print(f"  可视化已保存: assets/{out_path.name}")
 
 
 if __name__ == "__main__":

@@ -7,24 +7,24 @@
 运行：python case1_regression_comparison.py
 依赖：numpy, scikit-learn
 """
+
 import numpy as np
 from sklearn.datasets import make_regression
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_squared_error, r2_score
-from sklearn.preprocessing import StandardScaler
-from sklearn.pipeline import make_pipeline
-from sklearn.linear_model import LinearRegression
-from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, r2_score
+from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsRegressor
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
 from sklearn.svm import SVR
+from sklearn.tree import DecisionTreeRegressor
 
 
 def main():
     # 合成「房价」数据：10 个特征，含非线性噪声
     X, y = make_regression(
-        n_samples=3000, n_features=10, n_informative=6,
-        noise=20.0, random_state=42
+        n_samples=3000, n_features=10, n_informative=6, noise=20.0, random_state=42
     )
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.2, random_state=42
