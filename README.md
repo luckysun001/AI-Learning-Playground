@@ -1,5 +1,9 @@
 # AI-Learning-Playground
 
+[![CI](https://github.com/luckysun001/AI-Learning-Playground/actions/workflows/ci.yml/badge.svg)](https://github.com/luckysun001/AI-Learning-Playground/actions/workflows/ci.yml)
+![Python](https://img.shields.io/badge/python-3.10%2B-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+
 > 系统化人工智能学习开源项目：从传统机器学习到多智能体系统，配套「原理讲解 + 标准伪代码 + 可运行实战」三重学习路径。
 
 本项目的目标是帮助 AI 学习者建立「理论—算法—工程」三位一体的知识体系。每个知识点都提供：
