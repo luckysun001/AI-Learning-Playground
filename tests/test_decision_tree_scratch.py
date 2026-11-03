@@ -1,10 +1,9 @@
 """决策树（CART 分类，从零实现）基线测试。"""
 
+import decision_tree_scratch as dt
 import numpy as np
 import pytest
 from sklearn.datasets import make_classification
-
-import decision_tree_scratch as dt
 
 
 def test_gini_pure_is_zero():

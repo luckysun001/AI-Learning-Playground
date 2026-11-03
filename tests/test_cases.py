@@ -5,15 +5,13 @@
 - 各 case 的 main() 都能无异常跑通（案例3 的 matplotlib 由 conftest 桩接管）
 """
 
-import numpy as np
-import pandas as pd
-import pytest
-
 import case1_regression_comparison
 import case2_churn_prediction
 import case3_clustering_pca
 import case4_credit_scoring
-
+import numpy as np
+import pandas as pd
+import pytest
 
 # ---------- case2：客户流失数据构造 ----------
 

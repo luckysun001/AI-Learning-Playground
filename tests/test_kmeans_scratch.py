@@ -4,11 +4,10 @@
 CI 用真实包，不影响算法逻辑测试。
 """
 
+import kmeans_scratch as km
 import numpy as np
 import pytest
 from sklearn.datasets import make_blobs
-
-import kmeans_scratch as km
 
 
 @pytest.fixture
