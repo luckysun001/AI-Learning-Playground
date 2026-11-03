@@ -30,6 +30,7 @@ from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
 def make_churn_dataframe(n=2000, seed=42):
     """构造一个带缺失值、含数值与类别特征的流失数据集（纯合成）。"""
+    rng = np.random.default_rng(seed)
     X, y = make_classification(
         n_samples=n,
         n_features=6,
@@ -39,12 +40,12 @@ def make_churn_dataframe(n=2000, seed=42):
         random_state=seed,
     )
     df = pd.DataFrame(X, columns=[f"num{i}" for i in range(6)])
-    # 注入类别特征
-    df["plan"] = np.random.choice(["free", "basic", "pro"], n)
-    df["region"] = np.random.choice(["north", "south", "east", "west"], n)
+    # 注入类别特征（用 seeded RNG，保证结果可复现）
+    df["plan"] = rng.choice(["free", "basic", "pro"], n)
+    df["region"] = rng.choice(["north", "south", "east", "west"], n)
     df["churn"] = y
-    # 注入缺失值
-    mask = np.random.RandomState(seed).rand(*df[["num0", "num1"]].shape) < 0.1
+    # 注入缺失值（同样用 seeded RNG）
+    mask = rng.random(df[["num0", "num1"]].shape) < 0.1
     df.loc[mask[:, 0], "num0"] = np.nan
     df.loc[mask[:, 1], "num1"] = np.nan
     return df

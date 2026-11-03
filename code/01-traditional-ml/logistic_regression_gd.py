@@ -16,8 +16,15 @@ from sklearn.preprocessing import StandardScaler
 
 
 def sigmoid(z):
-    # 数值稳定版
-    return np.where(z >= 0, 1 / (1 + np.exp(-z)), np.exp(z) / (1 + np.exp(z)))
+    # 数值稳定版：只计算所需分支，避免大负数时 exp(-z) 溢出产生警告
+    z = np.asarray(z, dtype=float)
+    out = np.empty_like(z)
+    pos = z >= 0
+    out[pos] = 1.0 / (1.0 + np.exp(-z[pos]))
+    neg = ~pos
+    e = np.exp(z[neg])
+    out[neg] = e / (1.0 + e)
+    return out
 
 
 def logistic_regression_gd(X, y, lr=0.1, epochs=3000):

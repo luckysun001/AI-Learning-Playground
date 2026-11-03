@@ -107,6 +107,22 @@ python linear_regression_gd.py
 
 ---
 
+## 🧪 测试
+
+仓库为 `code/` 下的「从零实现」算法提供了 pytest 基线测试，覆盖线性回归 / 逻辑回归 /
+决策树（CART）/ K-Means / WOE-IV / 客户流失特征工程，以及 4 个案例脚本的端到端冒烟。
+
+```bash
+pip install -r requirements-base.txt
+pytest                 # 运行全部测试（testpaths=tests）
+pytest -o addopts=""   # 跳过覆盖率收集，跑得更快
+```
+
+> 说明：`kmeans_scratch.py`、`case3_clustering_pca.py` 在模块级 `import matplotlib`。
+> CI 已安装 matplotlib；本地若未安装，测试会自动注入最小桩，使导入与算法逻辑测试照常进行。
+
+---
+
 ## 🔗 相关项目
 
 本仓库专注「**为什么**能这么用」——把算法原理和代码实现讲透。
