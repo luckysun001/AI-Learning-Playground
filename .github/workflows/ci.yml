@@ -41,3 +41,6 @@ jobs:
         run: |
           python code/01-traditional-ml/linear_regression_gd.py
           python code/01-traditional-ml/kmeans_scratch.py
+
+      - name: Run pytest suite
+        run: pytest -q
