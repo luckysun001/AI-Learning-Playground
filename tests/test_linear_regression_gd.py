@@ -13,9 +13,7 @@ from linear_regression_gd import linear_regression_gd as linreg
 
 @pytest.fixture
 def regression_data():
-    X, y = make_regression(
-        n_samples=2000, n_features=5, noise=15.0, random_state=42
-    )
+    X, y = make_regression(n_samples=2000, n_features=5, noise=15.0, random_state=42)
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.2, random_state=42
     )

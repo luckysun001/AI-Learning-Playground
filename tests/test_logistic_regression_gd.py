@@ -28,15 +28,17 @@ def clf_data():
 def test_sigmoid_properties():
     z = np.array([-1000.0, -1.0, 0.0, 1.0, 1000.0])
     s = logistic_regression_gd.sigmoid(z)
-    assert s[0] < 1e-6          # 大负数 -> 趋近 0
+    assert s[0] < 1e-6  # 大负数 -> 趋近 0
     assert abs(s[2] - 0.5) < 1e-9  # 0 -> 0.5
-    assert s[-1] > 1 - 1e-6      # 大正数 -> 趋近 1
+    assert s[-1] > 1 - 1e-6  # 大正数 -> 趋近 1
     assert np.all(np.diff(s) > 0)  # 单调递增
 
 
 def test_theta_shape_and_predict_labels(clf_data):
     Xtr, Xte, y_train, _ = clf_data
-    theta = logistic_regression_gd.logistic_regression_gd(Xtr, y_train, lr=0.1, epochs=3000)
+    theta = logistic_regression_gd.logistic_regression_gd(
+        Xtr, y_train, lr=0.1, epochs=3000
+    )
     assert theta.shape == (Xtr.shape[1],)
     preds = logistic_regression_gd.predict(Xte, theta)
     assert set(np.unique(preds)).issubset({0, 1})
@@ -45,7 +47,9 @@ def test_theta_shape_and_predict_labels(clf_data):
 
 def test_accuracy_reasonable(clf_data):
     Xtr, Xte, y_train, y_test = clf_data
-    theta = logistic_regression_gd.logistic_regression_gd(Xtr, y_train, lr=0.1, epochs=4000)
+    theta = logistic_regression_gd.logistic_regression_gd(
+        Xtr, y_train, lr=0.1, epochs=4000
+    )
     y_pred = logistic_regression_gd.predict(Xte, theta)
     # 合成数据简单可分，从零实现应达到基本准确率
     assert accuracy_score(y_test, y_pred) > 0.7
@@ -53,7 +57,9 @@ def test_accuracy_reasonable(clf_data):
 
 def test_threshold_argument(clf_data):
     Xtr, Xte, y_train, _ = clf_data
-    theta = logistic_regression_gd.logistic_regression_gd(Xtr, y_train, lr=0.1, epochs=2000)
+    theta = logistic_regression_gd.logistic_regression_gd(
+        Xtr, y_train, lr=0.1, epochs=2000
+    )
     # 阈值设极高 -> 全部判为 0（sigmoid 恒 < 0.999）；阈值设 0 -> 全部判为 1（sigmoid 恒 >= 0）
     assert np.all(logistic_regression_gd.predict(Xte, theta, threshold=0.999) == 0)
     assert np.all(logistic_regression_gd.predict(Xte, theta, threshold=0.0) == 1)

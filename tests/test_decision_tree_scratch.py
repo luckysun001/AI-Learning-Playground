@@ -29,8 +29,18 @@ def test_best_split_finds_a_split():
 
 def test_build_and_predict_separable():
     # 完全可分的两簇
-    X = np.array([[0.0, 0.0], [0.0, 1.0], [1.0, 0.0], [1.0, 1.0],
-                  [5.0, 5.0], [5.0, 6.0], [6.0, 5.0], [6.0, 6.0]])
+    X = np.array(
+        [
+            [0.0, 0.0],
+            [0.0, 1.0],
+            [1.0, 0.0],
+            [1.0, 1.0],
+            [5.0, 5.0],
+            [5.0, 6.0],
+            [6.0, 5.0],
+            [6.0, 6.0],
+        ]
+    )
     y = np.array([0, 0, 0, 0, 1, 1, 1, 1])
     tree = dt.build_tree(X, y, max_depth=5)
     preds = dt.predict(tree, X)

@@ -17,6 +17,7 @@ import case4_credit_scoring
 
 # ---------- case2：客户流失数据构造 ----------
 
+
 def test_make_churn_dataframe_basic():
     df = case2_churn_prediction.make_churn_dataframe(n=500, seed=42)
     assert isinstance(df, pd.DataFrame)
@@ -37,6 +38,7 @@ def test_make_churn_dataframe_deterministic():
 
 # ---------- case4：WOE / IV ----------
 
+
 def test_compute_woe_iv_returns():
     rng = np.random.default_rng(42)
     n = 2000
@@ -44,7 +46,9 @@ def test_compute_woe_iv_returns():
     # 收入越高，违约概率越低
     logit = (x - 50) * 0.05 + rng.normal(0, 1, n)
     y = (logit > 0).astype(int)
-    woe_map, iv = case4_credit_scoring.compute_woe_iv(pd.Series(x), pd.Series(y), bins=5)
+    woe_map, iv = case4_credit_scoring.compute_woe_iv(
+        pd.Series(x), pd.Series(y), bins=5
+    )
     assert isinstance(woe_map, dict)
     assert len(woe_map) >= 1
     assert iv >= 0.0
@@ -57,7 +61,9 @@ def test_woe_monotonic_with_target():
     n = 3000
     x = rng.uniform(0, 100, n)
     y = (x + rng.normal(0, 10, n) > 50).astype(int)
-    woe_map, iv = case4_credit_scoring.compute_woe_iv(pd.Series(x), pd.Series(y), bins=5)
+    woe_map, iv = case4_credit_scoring.compute_woe_iv(
+        pd.Series(x), pd.Series(y), bins=5
+    )
     # x 越高 -> y 越可能为 1（坏样本）；故低分箱好样本多 -> WOE 为正，
     # 高分箱坏样本多 -> WOE 为负。即最低分箱 WOE 应大于最高分箱 WOE（单调）
     keys = list(woe_map.keys())
@@ -65,6 +71,7 @@ def test_woe_monotonic_with_target():
 
 
 # ---------- 各 case main() 端到端冒烟 ----------
+
 
 def test_case1_main_runs(capsys):
     case1_regression_comparison.main()
