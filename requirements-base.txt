@@ -1,9 +1,11 @@
+# 依赖约束策略：下限 >= + 上限 < 下一个破坏性版本（上限取当前最新版的下一破坏性边界）。
+# 仅限版本区间，今天 pip install 解析结果不变，阻止未来破坏性大版本无声升级。
 # 基础依赖：数学 / 传统机器学习
 # 安装：pip install -r requirements-base.txt
-numpy>=1.24
-pandas>=2.0
-scikit-learn>=1.3
-matplotlib>=3.7
-seaborn>=0.12
-scipy>=1.10
-jupyter>=1.0
+numpy>=1.24,<3.0.0
+pandas>=2.0,<3.0.0
+scikit-learn>=1.3,<2.0.0
+matplotlib>=3.7,<4.0.0
+seaborn>=0.12,<0.14.0
+scipy>=1.10,<2.0.0
+jupyter>=1.0,<2.0.0

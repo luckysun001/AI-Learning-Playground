@@ -1,9 +1,11 @@
+# 依赖约束策略：下限 >= + 上限 < 下一个破坏性版本（上限取当前最新版的下一破坏性边界）。
+# 仅限版本区间，今天 pip install 解析结果不变，阻止未来破坏性大版本无声升级。
 # 深度学习依赖
 # 安装：pip install -r requirements-dl.txt
 # 注意：torch 体积较大，建议先装 CPU 版：
 #   pip install torch --index-url https://download.pytorch.org/whl/cpu
-torch>=2.1
-torchvision>=0.16
-pytorch-lightning>=2.0
-tensorboard>=2.13
-tqdm>=4.65
+torch>=2.1,<3.0.0
+torchvision>=0.16,<0.30.0
+pytorch-lightning>=2.0,<3.0.0
+tensorboard>=2.13,<3.0.0
+tqdm>=4.65,<5.0.0
