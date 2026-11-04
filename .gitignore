@@ -46,3 +46,8 @@ Thumbs.db
 *.zip
 *.tar.gz
 *.pdf
+
+# Coverage reports
+.coverage
+coverage.xml
+htmlcov/
