@@ -17,7 +17,6 @@ ASSETS_DIR = Path(__file__).resolve().parents[2] / "assets"
 ASSETS_DIR.mkdir(parents=True, exist_ok=True)
 
 import matplotlib
-import numpy as np
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
