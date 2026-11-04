@@ -121,6 +121,20 @@ pytest -o addopts=""   # 跳过覆盖率收集，跑得更快
 > 说明：`kmeans_scratch.py`、`case3_clustering_pca.py` 在模块级 `import matplotlib`。
 > CI 已安装 matplotlib；本地若未安装，测试会自动注入最小桩，使导入与算法逻辑测试照常进行。
 
+### 持续集成 (CI)
+
+所有改动都经过 GitHub Actions 自动验证（`.github/workflows/ci.yml`）：
+
+- **触发条件**：`push` 与 `pull_request` 均覆盖 `main` 与 `dev` 分支
+- **运行环境**：Ubuntu，Python 3.11 / 3.12 双版本矩阵（`fail-fast: false`）
+- **验证内容**：
+  1. `black --check` + `isort --check-only` 代码格式校验
+  2. 全部 Python 文件 `py_compile` 语法检查
+  3. 从零实现脚本冒烟测试（`linear_regression_gd.py` / `kmeans_scratch.py`）
+  4. `pytest -q` 运行基线测试套件
+
+> **依赖版本约束**：`requirements-{base,dl,llm}.txt` 采用「下限 `>=` + 上限 `<` 下一个破坏性版本」区间约束（如 `torch>=2.1,<3.0.0`、`transformers>=4.40,<6.0.0`），分级安装、阻止未来破坏性升级。
+
 ---
 
 ## 🔗 相关项目
