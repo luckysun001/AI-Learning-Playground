@@ -71,7 +71,9 @@ def main():
     clf = LogisticRegression().fit(X_train, y_train)
     auc = roc_auc_score(y_test, clf.predict_proba(X_test)[:, 1])
     print(f"  逻辑回归 AUC={auc:.3f}")
-    coefs = dict(zip(["income_woe", "debt_woe"], np.round(clf.coef_[0], 3)))
+    coefs = dict(
+        zip(["income_woe", "debt_woe"], np.round(clf.coef_[0], 3), strict=False)
+    )
     print("  WOE 系数（正=降低违约概率）：", coefs)
 
 

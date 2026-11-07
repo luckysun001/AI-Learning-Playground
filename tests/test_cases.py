@@ -11,7 +11,6 @@ import case3_clustering_pca
 import case4_credit_scoring
 import numpy as np
 import pandas as pd
-import pytest
 
 # ---------- case2：客户流失数据构造 ----------
 

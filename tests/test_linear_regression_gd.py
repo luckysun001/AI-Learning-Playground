@@ -5,7 +5,7 @@ import pytest
 from linear_regression_gd import linear_regression_gd as linreg
 from sklearn.datasets import make_regression
 from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error, r2_score
+from sklearn.metrics import r2_score
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
